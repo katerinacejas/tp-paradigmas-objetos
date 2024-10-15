@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.*;
 
 public class Empleado {
@@ -7,9 +8,23 @@ public class Empleado {
     private int horasExtra = 0;
     private Contrato contrato;
     private List<Bono> bonos;
-    private Date fechaDeIngreso;
+    private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
     private List<Licencia> licencias;
+
+    //constructor
+    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato) {
+        this.nombreCompleto = unNombreCompleto;
+        this.dni = unDni;
+        this.cargo = unCargo;
+        this.contrato = unContrato;
+
+        //esto podríamos ponerle una fecha vieja para que en el bono de antiguedad haya mas de 6 meses de diferencia y pueda cobrarlo
+        this.fechaDeIngreso = LocalDate.now();
+
+        //por default al inicio por ser valor intermedio
+        this.nivelDeRendimiento = 3;
+    }
 
     public void hacerHorasExtra(int unasHorasExtra) {
         this.horasExtra += unasHorasExtra;
