@@ -7,20 +7,27 @@ public class Empleado {
     private Cargo cargo;
     private int horasExtra = 0;
     private Contrato contrato;
-    private List<Bono> bonos;
     private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
+
+    //puse set porque no puede haber repetidos los bonos
+    private Set<Bono> bonos;
+
+    //list porque puede tener varias licencias del mismo tipo en la coleccion
     private List<Licencia> licencias;
 
     //constructor
-    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato) {
+    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
         this.cargo = unCargo;
         this.contrato = unContrato;
 
-        //esto podríamos ponerle una fecha vieja para que en el bono de antiguedad haya mas de 6 meses de diferencia y pueda cobrarlo
+        //si queremos que la fecha de ingreso sea en este instante, se debería iniciar así
         this.fechaDeIngreso = LocalDate.now();
+
+        //sino, se le pasa la fecha por parámetro.
+        this.fechaDeIngreso = unaFechaDeIngreso;
 
         //por default al inicio por ser valor intermedio
         this.nivelDeRendimiento = 3;
@@ -59,5 +66,18 @@ public class Empleado {
 
     public void tomarLicencia(Licencia licencia) {
         // Método vacío
+    }
+
+    //getters
+    public LocalDate getFechaDeIngreso() {
+        return this.fechaDeIngreso;
+    }
+
+    public Contrato getContrato() {
+        return this.contrato;
+    }
+
+    public Cargo getCargo(){
+        return this.cargo;
     }
 }
