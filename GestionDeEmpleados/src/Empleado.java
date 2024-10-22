@@ -26,6 +26,7 @@ public class Empleado {
         this.cargo = unCargo;
         this.contrato = unContrato;
         this.licencias = new ArrayList<>(); //acá la lista de licencias que corresponda.
+        this.bonos = new HashSet<>();
 
         //si queremos que la fecha de ingreso sea en este instante, se debería iniciar así
         this.fechaDeIngreso = LocalDate.now();
@@ -115,7 +116,7 @@ public class Empleado {
     }
 
     public void tomarLicencia(Licencia licencia) {
-        // Método vacío
+        //
     }
 
     //getters
