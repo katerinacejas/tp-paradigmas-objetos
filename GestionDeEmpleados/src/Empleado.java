@@ -13,7 +13,7 @@ public class Empleado {
 
 
     //puse set porque no puede haber repetidos los bonos
-    private Set<Bono> bonos;
+    private HashSet<Bono> bonos;
 
 
     //list porque puede tener varias licencias del mismo tipo en la coleccion
@@ -48,8 +48,9 @@ public class Empleado {
         return horasTrabajadas;
     }
     //getter de nivelDeRendimiento
-    public int getNivelDeRendimiento()
+    public int getNivelDeRendimiento() {
         return nivelDeRendimiento;
+    }
 
     public void agregarLicenciaEstudio(int horas) {
         LicenciaPorDiaDeEstudio licencia = new LicenciaPorDiaDeEstudio(horas);
@@ -94,7 +95,14 @@ public class Empleado {
     }
 
     public int calcularBonoRendimiento() {
-        return this.bonos.getFirst().calcularBono(this);
+        //return this.bonos.getFirst().calcularBono(this);
+        /*
+            comento la linea anterior porque al ser bonos un hashset, no tiene indice,
+            entonces no puede saber cual es el first ingresado.
+            aca se tiene que hacer una condicion para verificar si el bono es de rendimiento.
+            para eso se me ocurre cheqeuarlo con el atributo frecuencia.
+         */
+        return 0;
     }
 
     public int calcularBonoPresentismo() {
