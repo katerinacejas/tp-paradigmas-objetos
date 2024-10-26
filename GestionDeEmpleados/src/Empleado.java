@@ -4,6 +4,7 @@ import java.util.*;
 public class Empleado {
     private String nombreCompleto;
     private int dni;
+    private Sexo sexo;
     private Cargo cargo;
     private int horasExtra = 0;
     private Contrato contrato;
@@ -13,7 +14,7 @@ public class Empleado {
     private HashSet<Licencia> licencias;
 
     //constructor
-    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso) {
+    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
         this.cargo = unCargo;
@@ -22,6 +23,7 @@ public class Empleado {
         this.bonos = new HashSet<>();
         this.fechaDeIngreso = unaFechaDeIngreso;
         this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
+        this.sexo = unSexo;
     }
 
     public void hacerHorasExtra(int unasHorasExtra) {
@@ -34,8 +36,9 @@ public class Empleado {
             sueldo basico +
             bonos que corresponda cobrar ese mes +
             valor de las horas extra +
-            valor por los días de estudio que se haya pedido +
-            valor por las vacaciones que haya tenido
+            valor por los días de estudio que se haya pedido
+            y se resta el valor de los dias de vacaciones que se haya pedido si se las pidio antes de cobrar el sueldo,
+            porque las vacaciones se pagan adelantadas
             (las licencias por fallecimiento, enfermedad y nacimiendo no modifican el sueldo final del empleado)
          */
         return 0;
@@ -67,8 +70,14 @@ public class Empleado {
         this.cargo = otroCargo;
     }
 
-    public void tomarLicencia(Licencia licencia) {
-        //
+    public void tomarLicencia(Licencia unaLicencia) {
+        if (unaLicencia.puedeSerTomadaPor(this)){
+            unaLicencia.serTomadaPor(this);
+            licencias.add(unaLicencia);
+        }
+        else {
+            // aca se lanzaría una excepcion o error por no poder tomar la licencia.
+        }
     }
 
     //getters
@@ -92,37 +101,14 @@ public class Empleado {
         return this.horasExtra;
     }
 
-
-
-    public void agregarLicenciaEstudio(int horas) {
-        LicenciaPorDiaDeEstudio licencia = new LicenciaPorDiaDeEstudio(horas);
-        licencias.add(licencia);
-    }
-
-    public void agregarLicenciaEnfermedad(int horas) {
-        LicenciaPorEnfermedad licencia = new LicenciaPorEnfermedad(horas);
-        licencias.add(licencia);
-    }
-
-    public void agregarLicenciaFallecimiento(int horas) {
-        LicenciaPorFallecimiento licencia = new LicenciaPorFallecimiento(horas);
-        licencias.add(licencia);
-    }
-
-    public void agregarLicenciaNacimiento(int horas) {
-        LicenciaPorNacimiento licencia = new LicenciaPorNacimiento(horas);
-        licencias.add(licencia);
-    }
-
-    public void agregarLicenciaVacaciones(int horas) {
-        LicenciaPorVacaciones licencia = new LicenciaPorVacaciones(horas);
-        licencias.add(licencia);
+    public Sexo getSexo() {
+        return this.sexo;
     }
 
     public int calcularHorasTotalesLicencia() {
         int totalHoras = 0;
         for (Licencia licencia : licencias) {
-            totalHoras += licencia.getHoras(); // Sumar horas de cada licencia
+    //        totalHoras += licencia.getHoras(); // Sumar horas de cada licencia
         }
         return totalHoras;
     }
