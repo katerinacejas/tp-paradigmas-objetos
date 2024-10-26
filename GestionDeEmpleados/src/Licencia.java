@@ -1,4 +1,5 @@
 public abstract class Licencia {
+    
     protected int horas;
 
     public Licencia() {

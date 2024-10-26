@@ -9,15 +9,8 @@ public class Empleado {
     private Contrato contrato;
     private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
-    private int horasTrabajadas = 0; // conteo de horas totales en 0
-
-
-    //puse set porque no puede haber repetidos los bonos
     private HashSet<Bono> bonos;
-
-
-    //list porque puede tener varias licencias del mismo tipo en la coleccion
-    private List<Licencia> licencias;
+    private HashSet<Licencia> licencias;
 
     //constructor
     public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso) {
@@ -25,32 +18,81 @@ public class Empleado {
         this.dni = unDni;
         this.cargo = unCargo;
         this.contrato = unContrato;
-        this.licencias = new ArrayList<>(); //acá la lista de licencias que corresponda.
+        this.licencias = new HashSet<>();
         this.bonos = new HashSet<>();
-
-        //si queremos que la fecha de ingreso sea en este instante, se debería iniciar así
-        this.fechaDeIngreso = LocalDate.now();
-
-        //sino, se le pasa la fecha por parámetro.
         this.fechaDeIngreso = unaFechaDeIngreso;
-
-        //por default al inicio por ser valor intermedio
-        this.nivelDeRendimiento = 3;
-
-
+        this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
     }
-    // incrementa horas trabajadas
-    public void incrementarHorasTrabajadas(int horas) {
-        this.horasTrabajadas += horas;
+
+    public void hacerHorasExtra(int unasHorasExtra) {
+        this.horasExtra += unasHorasExtra;
     }
-    //getter de horasTrabajadas
-    public int getHorasTrabajadas() {
-        return horasTrabajadas;
+
+    public int calcularSueldo() {
+        // esto debería ser el calculo de la suma de
+        /*
+            sueldo basico +
+            bonos que corresponda cobrar ese mes +
+            valor de las horas extra +
+            valor por los días de estudio que se haya pedido +
+            valor por las vacaciones que haya tenido
+            (las licencias por fallecimiento, enfermedad y nacimiendo no modifican el sueldo final del empleado)
+         */
+        return 0;
     }
-    //getter de nivelDeRendimiento
+
+    public int calcularBonoRendimiento() {
+        return 0;
+    }
+
+    public int calcularBonoPresentismo() {
+        BonoPresentismo bonoPresentismo = new BonoPresentismo();
+        return bonoPresentismo.calcularBono(this);
+    }
+
+    public int calcularBonoAntiguedad() {
+        BonoAntiguedad bonoAntiguedad = new BonoAntiguedad();
+        return bonoAntiguedad.calcularBono(this);
+    }
+
+    public void mejorarRendimiento() {
+        this.nivelDeRendimiento++;
+    }
+
+    public void empeorarRendimiento() {
+        this.nivelDeRendimiento--;
+    }
+
+    public void cambiarDeCargo(Cargo otroCargo) {
+        this.cargo = otroCargo;
+    }
+
+    public void tomarLicencia(Licencia licencia) {
+        //
+    }
+
+    //getters
+    public LocalDate getFechaDeIngreso() {
+        return this.fechaDeIngreso;
+    }
+
+    public Contrato getContrato() {
+        return this.contrato;
+    }
+
+    public Cargo getCargo(){
+        return this.cargo;
+    }
+
     public int getNivelDeRendimiento() {
-        return nivelDeRendimiento;
+        return this.nivelDeRendimiento;
     }
+
+    public int getHorasExtra() {
+        return this.horasExtra;
+    }
+
+
 
     public void agregarLicenciaEstudio(int horas) {
         LicenciaPorDiaDeEstudio licencia = new LicenciaPorDiaDeEstudio(horas);
@@ -83,60 +125,5 @@ public class Empleado {
             totalHoras += licencia.getHoras(); // Sumar horas de cada licencia
         }
         return totalHoras;
-    }
-
-    public void hacerHorasExtra(int unasHorasExtra) {
-        this.horasExtra += unasHorasExtra;
-    }
-
-    public int calcularSueldo() {
-        // esto no debería ser empleado.getCargo().getSueldoBasico(); ?
-        return 0;
-    }
-
-    public int calcularBonoRendimiento() {
-        //return this.bonos.getFirst().calcularBono(this);
-        /*
-            comento la linea anterior porque al ser bonos un hashset, no tiene indice,
-            entonces no puede saber cual es el first ingresado.
-            aca se tiene que hacer una condicion para verificar si el bono es de rendimiento.
-            para eso se me ocurre cheqeuarlo con el atributo frecuencia.
-         */
-        return 0;
-    }
-
-    public int calcularBonoPresentismo() {
-        BonoPresentismo bonoPresentismo = new BonoPresentismo();
-        return bonoPresentismo.calcularBono(this)
-    }
-
-    public int calcularBonoAntiguedad() {
-        BonoAntiguedad bonoAntiguedad = new BonoAntiguedad();
-        return bonoAntiguedad.calcularBono(this);
-    }
-
-    public void mejorarRendimiento() {
-        // Método vacío
-    }
-
-    public void cambiarDeCargo(Cargo cargo) {
-        // Método vacío
-    }
-
-    public void tomarLicencia(Licencia licencia) {
-        //
-    }
-
-    //getters
-    public LocalDate getFechaDeIngreso() {
-        return this.fechaDeIngreso;
-    }
-
-    public Contrato getContrato() {
-        return this.contrato;
-    }
-
-    public Cargo getCargo(){
-        return this.cargo;
     }
 }
