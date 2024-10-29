@@ -1,28 +1,13 @@
 import java.time.LocalDate;
 
 public class LicenciaPorDiaDeEstudio extends Licencia {
-    private String materiaARendir;
-
-    public LicenciaPorDiaDeEstudio(LocalDate unaFechaInicio, int unosDiasDuracion) {
-        super(unaFechaInicio);
-
-        this.fechaFin = unaFechaInicio.plusDays(((long) unosDiasDuracion));
-        this.diasDuracion = unosDiasDuracion;
-
-        //atributos comunes de esta
-
+    public LicenciaPorDiaDeEstudio(LocalDate unaFechaInicio, LocalDate unaFechaFin) {
+        super(unaFechaInicio, unaFechaFin);
+        System.out.println("la cantidad de dias duracion es = " + diasDuracion);
     }
 
     public boolean puedeSerTomadaPor(Empleado unEmpleado){
-        return true;
+        return this.diasTotalesTomadosMasEstaLicencia(unEmpleado, this.getClass()) <= 10;
     }
 
-    public void serTomadaPor(Empleado unEmpleado){
-
-    }
-
-    //setters
-    public void setMateriaARendir(String unaMateria) {
-        this.materiaARendir = unaMateria;
-    }
 }

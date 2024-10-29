@@ -1,45 +1,34 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public abstract class Licencia {
     protected LocalDate fechaInicio;
     protected LocalDate fechaFin;
     protected int diasDuracion;
-    protected int cantDiasMaximosATomarse;
-    protected int diasRestantesDisponiblesATomar;
 
-    public Licencia (LocalDate unaFechaInicio){
+    public Licencia (LocalDate unaFechaInicio, LocalDate unaFechaFin){
         this.fechaInicio = unaFechaInicio;
+        this.fechaFin = unaFechaFin;
+        this.diasDuracion = (int) ChronoUnit.DAYS.between(unaFechaInicio, unaFechaFin);
     }
 
     public abstract boolean puedeSerTomadaPor(Empleado unEmpleado);
 
-    public abstract void serTomadaPor(Empleado unEmpleado);
-
+    //metodo utilizazdo en las licencias por estudio, por enfermedad y por vacaciones
+    public int diasTotalesTomadosMasEstaLicencia(Empleado unEmpleado, Class<? extends Licencia> claseLicencia) {
+        /*
+            paso 1: obtengo la coleccion de licencias del empleado
+            paso 2: filtro de todas las licencias las que son del tipo del objeto que llama a este metodo y que fueron tomadas en este año laboral
+            paso 3: me quedo con una coleccion de todos los días de duracion de cada licencia de dia de estudio de este año laboral
+            paso 4: hago una sumatoria de todos los dias que se tomo el empleado
+            paso 5: a ese total le sumo los dias que se quiere tomar ahora
+            paso 6: valido si el valor obtenido del paso 5 es menor o igual a la cantidad maxima de dias que se pueden tomar por la licencia
+        */
+        return unEmpleado.getLicencias().stream()
+                .filter(licencia -> claseLicencia.isInstance(licencia) &&
+                        licencia.fechaInicio.getYear() == this.fechaInicio.getYear())
+                .mapToInt(licencia -> licencia.diasDuracion)
+                .sum()
+                + this.diasDuracion;
+    }
 }
-
-/*
-Licencia por fallecimiento:
-3 días corridos por el fallecimiento de un cónyuge, padres, hijos, hermanos.
-1 día en caso de fallecimiento de abuelos o nietos.
-
-Licencia por nacimiento:
-2 días corridos para el padre.
-90 días para la madre (licencia por maternidad).
-
-Licencia por estudio/examen:
-2 días corridos por examen, hasta un máximo de 10 días al año.
-
-Licencia por enfermedad:
-Hasta 3 meses para empleados con menos de 5 años de antigüedad.
-Hasta 6 meses para empleados con 5 o más años de antigüedad.
-Si la enfermedad es prolongada, puede solicitarse licencia sin goce de sueldo tras agotar la licencia paga.
-
-Licencia sin goce de sueldo:
-No tiene un límite específico en la ley y se establece por acuerdo con el empleador.
-
-Licencia por vacaciones:
-Menos de 5 años de antigüedad: 14 días corridos.
-Entre 5 y 10 años de antigüedad: 21 días corridos.
-Entre 10 y 20 años de antigüedad: 28 días corridos.
-Más de 20 años de antigüedad: 35 días corridos.
- */

@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 public class Empleado {
@@ -70,13 +71,15 @@ public class Empleado {
         this.cargo = otroCargo;
     }
 
-    public void tomarLicencia(Licencia unaLicencia) {
+    public String tomarLicencia(Licencia unaLicencia) {
         if (unaLicencia.puedeSerTomadaPor(this)){
-            unaLicencia.serTomadaPor(this);
             licencias.add(unaLicencia);
+            return "El empleado se tomó la licencia";
         }
         else {
             // aca se lanzaría una excepcion o error por no poder tomar la licencia.
+            // por ahora un String xq no se como son las excepciones.
+            return "El empleado ya no tiene dias disponibles para tomarse esa licencia";
         }
     }
 
@@ -105,11 +108,14 @@ public class Empleado {
         return this.sexo;
     }
 
-    public int calcularHorasTotalesLicencia() {
-        int totalHoras = 0;
-        for (Licencia licencia : licencias) {
-    //        totalHoras += licencia.getHoras(); // Sumar horas de cada licencia
-        }
-        return totalHoras;
+    public int getAntiguedadEnAnios() {
+        return (int) ChronoUnit.YEARS.between(this.fechaDeIngreso, LocalDate.now());
+    }
+    public HashSet<Bono> getBonos() {
+        return this.bonos;
+    }
+
+    public HashSet<Licencia> getLicencias() {
+        return this.licencias;
     }
 }

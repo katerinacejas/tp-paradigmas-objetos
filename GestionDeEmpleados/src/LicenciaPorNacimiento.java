@@ -2,19 +2,16 @@ import java.time.LocalDate;
 
 public class LicenciaPorNacimiento extends Licencia {
 
-    public LicenciaPorNacimiento(LocalDate unaFechaInicio, LocalDate unaFechaFin, int unosDiasDuracion) {
-        super(unaFechaInicio);
-
-        this.fechaFin = unaFechaInicio.plusDays(((long) unosDiasDuracion));
-        this.diasDuracion = unosDiasDuracion;
-
+    public LicenciaPorNacimiento(LocalDate unaFechaInicio, LocalDate unaFechaFin) {
+        super(unaFechaInicio, unaFechaFin);
+        System.out.println("la cantidad de dias duracion es = " + diasDuracion);
     }
 
     public boolean puedeSerTomadaPor(Empleado unEmpleado){
-        return true;
+        return this.diasDuracion <= this.getDiasPermitidosPorSexo(unEmpleado);
     }
 
-    public void serTomadaPor(Empleado unEmpleado){
-
+    public int getDiasPermitidosPorSexo(Empleado unEmpleado) {
+        return unEmpleado.getSexo() == Sexo.FEMENINO ? 90 : 2;
     }
 }

@@ -1,20 +1,15 @@
 import java.time.LocalDate;
 
 public class LicenciaPorFallecimiento extends Licencia {
+    public PoliticaDiasPorLicencia parienteFallecido;
 
-    public LicenciaPorFallecimiento(LocalDate unaFechaInicio, LocalDate unaFechaFin, int unosDiasDuracion) {
-        super(unaFechaInicio);
-
-        this.fechaFin = unaFechaInicio.plusDays(((long) unosDiasDuracion));
-        this.diasDuracion = unosDiasDuracion;
-
+    public LicenciaPorFallecimiento(LocalDate unaFechaInicio, LocalDate unaFechaFin, PoliticaDiasPorLicencia unParienteFallecido) {
+        super(unaFechaInicio, unaFechaFin);
+        this.parienteFallecido = unParienteFallecido;
+        System.out.println("la cantidad de dias duracion es = " + diasDuracion);
     }
 
     public boolean puedeSerTomadaPor(Empleado unEmpleado) {
-        return true;
-    }
-
-    public void serTomadaPor(Empleado unEmpleado) {
-
+        return this.diasDuracion <= this.parienteFallecido.getDiasPermitidosPorLicencia();
     }
 }
