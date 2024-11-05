@@ -1,18 +1,8 @@
 public class ContratoFullTime extends Contrato{
-    private int cantidadDeHoras;
-    private int sueldoBasico;
 
-    public int getSueldoBasico() {
-        return sueldoBasico;
-    }
-
-    public void setCantidadDeHoras(int cantidadDeHoras) {
-        this.cantidadDeHoras = cantidadDeHoras;
-    }
-
-
-    public int getCantidadDeHoras() {
-        return this.cantidadDeHoras;
+    public ContratoFullTime(int unSueldoBasico) {
+        super(unSueldoBasico);
+        this.cantidadDeHoras = 8;
     }
 
     public int calcularBonoRendimiento(Empleado empleado) {

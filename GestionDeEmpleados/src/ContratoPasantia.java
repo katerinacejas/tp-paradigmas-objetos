@@ -1,14 +1,13 @@
 public class ContratoPasantia extends Contrato{
-    private int cantidadDeHoras;
-    private int sueldo;
 
-    public int getCantidadDeHoras() {
-        return this.cantidadDeHoras;
+    public ContratoPasantia (int unSueldoBasico) {
+        super(unSueldoBasico);
+        this.cantidadDeHoras = 4;
     }
 
     @Override
     public int calcularSueldo(Empleado empleado) {
-        return this.sueldo;
+        return 0;
 
     }
 }

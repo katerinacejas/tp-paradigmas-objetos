@@ -11,7 +11,7 @@ public class Main {
         Licencia licenciaDiaEstudio = new LicenciaPorDiaDeEstudio(fechaInicio, fechaFin);
 
         Cargo cargoKate = new Cargo();
-        Contrato contratoKate = new ContratoFullTime();
+        Contrato contratoKate = new ContratoFullTime(500000);
         LocalDate fechaIngreso = LocalDate.of(2022,3,7);
 
         Empleado kate = new Empleado("katerina cejas",

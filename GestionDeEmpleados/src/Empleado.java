@@ -32,20 +32,6 @@ public class Empleado {
         this.horasExtra += unasHorasExtra;
     }
 
-    public int calcularSueldo() {
-        // esto debería ser el calculo de la suma de
-        /*
-            sueldo basico +
-            bonos que corresponda cobrar ese mes +
-            valor de las horas extra +
-            valor por los días de estudio que se haya pedido
-            y se resta el valor de los dias de vacaciones que se haya pedido si se las pidio antes de cobrar el sueldo,
-            porque las vacaciones se pagan adelantadas
-            (las licencias por fallecimiento, enfermedad y nacimiendo no modifican el sueldo final del empleado)
-         */
-        return 0;
-    }
-
     public int getDiasTrabajadosMes() {
         return diasTrabajadosMes;
     }
@@ -53,9 +39,6 @@ public class Empleado {
     public void setDiasTrabajadosMes(int diasTrabajadosMes) {
         this.diasTrabajadosMes = diasTrabajadosMes;
     }
-
-
-
 
     public void mejorarRendimiento() {
         this.nivelDeRendimiento++;

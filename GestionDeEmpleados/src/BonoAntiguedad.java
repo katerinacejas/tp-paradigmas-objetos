@@ -7,7 +7,7 @@ public class BonoAntiguedad extends Bono {
         long diasEntreFechaIngresoYHoy = ChronoUnit.DAYS.between(empleado.getFechaDeIngreso(), LocalDate.now());
 
         if (diasEntreFechaIngresoYHoy >= 180) { // Al menos 6 meses de antigüedad
-            int sueldo = empleado.getCargo().getSueldoBasico();
+            int sueldo = empleado.getContrato().getSueldoBasico();
             int horasContrato = empleado.getContrato().getCantidadDeHoras();
 
             // Cálculo del bono: proporcional de horas según contrato +  proporcional al tope de años de trabajo estipulado (10 años)
