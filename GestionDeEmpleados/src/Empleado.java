@@ -13,8 +13,9 @@ public class Empleado {
     private int nivelDeRendimiento; //del 1 al 5
     private HashSet<Bono> bonos;
     private HashSet<Licencia> licencias;
+    private int diasTrabajadosMes;
 
-    //constructor
+     //constructor
     public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
@@ -45,19 +46,16 @@ public class Empleado {
         return 0;
     }
 
-    public int calcularBonoRendimiento() {
-        return 0;
+    public int getDiasTrabajadosMes() {
+        return diasTrabajadosMes;
     }
 
-    public int calcularBonoPresentismo() {
-        BonoPresentismo bonoPresentismo = new BonoPresentismo();
-        return bonoPresentismo.calcularBono(this);
+    public void setDiasTrabajadosMes(int diasTrabajadosMes) {
+        this.diasTrabajadosMes = diasTrabajadosMes;
     }
 
-    public int calcularBonoAntiguedad() {
-        BonoAntiguedad bonoAntiguedad = new BonoAntiguedad();
-        return bonoAntiguedad.calcularBono(this);
-    }
+
+
 
     public void mejorarRendimiento() {
         this.nivelDeRendimiento++;
