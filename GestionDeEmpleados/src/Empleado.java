@@ -1,6 +1,7 @@
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Empleado {
     private String nombreCompleto;
@@ -12,7 +13,6 @@ public class Empleado {
     private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
     private Set<Licencia> licencias;
-    private int diasTrabajadosMes;
     private Set<Titulo> titulosDeEstudio;
 
     // constructor para empleados sin titulos de estudio inicialmente
@@ -49,12 +49,6 @@ public class Empleado {
         this.horasExtra += unasHorasExtra;
     }
 
-    public void setDiasTrabajadosMes(int diasTrabajadosMes) {
-        this.diasTrabajadosMes = diasTrabajadosMes;
-        // aca deberia ser un calculo de:
-        // la cantidad de dias habiles en el mes menos la cantidad de dias de licencia que se tomo en ese mes
-    }
-
     public void mejorarRendimiento() {
         this.nivelDeRendimiento++;
     }
@@ -79,10 +73,24 @@ public class Empleado {
         }
     }
 
-    public int calcularPlusPorLicenciasDeEstudio() {
+    public Set<Licencia> licenciasTranscurridasEnElMesActual() {
         return this.licencias.stream()
                 .filter(licencia -> licencia.fechaInicio.getYear() == LocalDate.now().getYear() &&
-                        licencia.fechaInicio.getMonth() == LocalDate.now().getMonth() )
+                                    licencia.fechaInicio.getMonth() == LocalDate.now().getMonth() )
+                .collect(Collectors.toSet());
+    }
+
+    public int getDiasTrabajadosMes() {
+        Calendario anioActual = new Calendario();
+        int cantDiasHabiles = anioActual.diasHabilesMesActual(LocalDate.now().getMonthValue());
+        int cantDiasTomadosDeLicenciaEnElMes = this.licenciasTranscurridasEnElMesActual().stream()
+                                                .mapToInt(licencia -> licencia.getDiasDuracion())
+                                                .sum();
+        return cantDiasHabiles - cantDiasTomadosDeLicenciaEnElMes;
+    }
+
+    public int calcularPlusPorLicenciasDeEstudio() {
+        return this.licenciasTranscurridasEnElMesActual().stream()
                 .mapToInt(licencia -> licencia.plusPorLosDiasTomados())
                 .sum();
     }
@@ -118,10 +126,6 @@ public class Empleado {
 
     public Set<Licencia> getLicencias() {
         return this.licencias;
-    }
-
-    public int getDiasTrabajadosMes() {
-        return diasTrabajadosMes;
     }
 
     public Set<Titulo> getTitulosDeEstudio() {

@@ -32,4 +32,8 @@ public abstract class Licencia {
                 .sum()
                 + this.diasDuracion;
     }
+
+    public int getDiasDuracion() {
+        return this.diasDuracion;
+    }
 }
