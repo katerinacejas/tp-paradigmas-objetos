@@ -10,12 +10,11 @@ public class Main {
         LocalDate fechaFin = LocalDate.of(2024, 9, 4);
         Licencia licenciaDiaEstudio = new LicenciaPorDiaDeEstudio(fechaInicio, fechaFin);
 
-        Cargo cargoKate = new Cargo();
         Contrato contratoKate = new ContratoFullTime(500000);
         LocalDate fechaIngreso = LocalDate.of(2022,3,7);
 
         Empleado kate = new Empleado("katerina cejas",
-                                    41824075,cargoKate, contratoKate,
+                                    41824075, contratoKate,
                                         fechaIngreso, Sexo.FEMENINO);
 
         System.out.println(kate.tomarLicencia(licenciaDiaEstudio));
@@ -76,7 +75,7 @@ public class Main {
         System.out.println("************************************************");
 
         Empleado kate2 = new Empleado("katerina cejas",
-                41824075,cargoKate, contratoKate,
+                41824075, contratoKate,
                 LocalDate.of(2010,4,5), Sexo.FEMENINO);
 
         Licencia licenciaPorenfermedad = new LicenciaPorEnfermedad(LocalDate.of(2024,1,1),
@@ -133,7 +132,7 @@ public class Main {
         );
 
         Empleado hombre = new Empleado("nombre apellido",
-                41824075,cargoKate, contratoKate,
+                41824075, contratoKate,
                 fechaIngreso, Sexo.MASCULINO);
 
         //esta licencia si debe permitir tomarla porque pide licencia de 2 dias que es lo mismo que la maxima cantidad de dias que se da al sexo masculino

@@ -7,7 +7,6 @@ public class Empleado {
     private String nombreCompleto;
     private int dni;
     private Sexo sexo;
-    private Cargo cargo;
     private int horasExtra = 0;
     private Contrato contrato;
     private LocalDate fechaDeIngreso;
@@ -16,10 +15,9 @@ public class Empleado {
     private Set<Titulo> titulosDeEstudio;
 
     // constructor para empleados sin titulos de estudio inicialmente
-    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo) {
+    public Empleado (String unNombreCompleto, int unDni, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
-        this.cargo = unCargo;
         this.contrato = unContrato;
         this.licencias = new HashSet<>();
         this.fechaDeIngreso = unaFechaDeIngreso;
@@ -29,10 +27,9 @@ public class Empleado {
     }
 
     // constructor para empleados que ya tienen titulo/titulos de estudio desde el inicio.
-    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo, Set<Titulo> unosTitulosDeEstudio) {
+    public Empleado (String unNombreCompleto, int unDni, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo, Set<Titulo> unosTitulosDeEstudio) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
-        this.cargo = unCargo;
         this.contrato = unContrato;
         this.licencias = new HashSet<>();
         this.fechaDeIngreso = unaFechaDeIngreso;
@@ -50,16 +47,15 @@ public class Empleado {
     }
 
     public void mejorarRendimiento() {
-        this.nivelDeRendimiento++;
+        // esto es para que nunca sea el rendimiento mayor a 5. Ese es el tope
+        this.nivelDeRendimiento = Math.min(this.nivelDeRendimiento + 1, 5);
     }
 
     public void empeorarRendimiento() {
-        this.nivelDeRendimiento--;
+        // esto es para que nunca sea el rendimiento menor a 0. Ese es el piso
+        this.nivelDeRendimiento = Math.max(this.nivelDeRendimiento - 1, 0);
     }
 
-    public void cambiarDeCargo(Cargo otroCargo) {
-        this.cargo = otroCargo;
-    }
 
     public String tomarLicencia(Licencia unaLicencia) {
         if (unaLicencia.puedeSerTomadaPor(this)){
@@ -102,10 +98,6 @@ public class Empleado {
 
     public Contrato getContrato() {
         return this.contrato;
-    }
-
-    public Cargo getCargo(){
-        return this.cargo;
     }
 
     public int getNivelDeRendimiento() {
