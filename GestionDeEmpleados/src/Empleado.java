@@ -11,7 +11,6 @@ public class Empleado {
     private Contrato contrato;
     private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
-    private HashSet<Bono> bonos;
     private HashSet<Licencia> licencias;
     private int diasTrabajadosMes;
 
@@ -22,22 +21,23 @@ public class Empleado {
         this.cargo = unCargo;
         this.contrato = unContrato;
         this.licencias = new HashSet<>();
-        this.bonos = new HashSet<>();
         this.fechaDeIngreso = unaFechaDeIngreso;
         this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
         this.sexo = unSexo;
+    }
+
+    public int calcularSueldo() {
+        return this.contrato.calcularSueldo(this);
     }
 
     public void hacerHorasExtra(int unasHorasExtra) {
         this.horasExtra += unasHorasExtra;
     }
 
-    public int getDiasTrabajadosMes() {
-        return diasTrabajadosMes;
-    }
-
     public void setDiasTrabajadosMes(int diasTrabajadosMes) {
         this.diasTrabajadosMes = diasTrabajadosMes;
+        // aca deberia ser un calculo de:
+        // la cantidad de dias habiles en el mes menos la cantidad de dias de licencia que se tomo en ese mes
     }
 
     public void mejorarRendimiento() {
@@ -62,6 +62,16 @@ public class Empleado {
             // por ahora un String xq no se como son las excepciones.
             return "El empleado ya no tiene dias disponibles para tomarse esa licencia";
         }
+    }
+
+    public int calcularPlusPorLicenciasDeEstudio() {
+        int cantDiasPorEstudioTomadosEnEsteMes =
+                this.licencias.stream()
+                .filter(licencia -> LicenciaPorDiaDeEstudio.class.isInstance(licencia) &&
+                        licencia.fechaInicio.getYear() == LocalDate.now().getYear() &&
+                        licencia.fechaInicio.getMonth() == LocalDate.now().getMonth() )
+                .mapToInt(licencia -> licencia.diasDuracion)
+                .sum();
     }
 
     //getters
@@ -92,11 +102,12 @@ public class Empleado {
     public int getAntiguedadEnAnios() {
         return (int) ChronoUnit.YEARS.between(this.fechaDeIngreso, LocalDate.now());
     }
-    public HashSet<Bono> getBonos() {
-        return this.bonos;
-    }
 
     public HashSet<Licencia> getLicencias() {
         return this.licencias;
+    }
+
+    public int getDiasTrabajadosMes() {
+        return diasTrabajadosMes;
     }
 }
