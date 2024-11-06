@@ -12,4 +12,8 @@ public class LicenciaPorFallecimiento extends Licencia {
     public boolean puedeSerTomadaPor(Empleado unEmpleado) {
         return this.diasDuracion <= this.parienteFallecido.getDiasPermitidosPorLicencia();
     }
+
+    public int plusPorLosDiasTomados() {
+        return 0; //no se da ningun plus por tomarse dias por fallecimiento
+    }
 }

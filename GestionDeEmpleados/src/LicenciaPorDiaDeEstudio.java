@@ -10,4 +10,8 @@ public class LicenciaPorDiaDeEstudio extends Licencia {
         return this.diasTotalesTomadosMasEstaLicencia(unEmpleado, this.getClass()) <= 10;
     }
 
+    public int plusPorLosDiasTomados() {
+        return this.diasDuracion * 13000; // $13000 es lo que vale 1 dia de estudio.
+    }
+
 }

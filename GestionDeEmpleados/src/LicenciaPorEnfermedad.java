@@ -14,4 +14,8 @@ public class LicenciaPorEnfermedad extends Licencia {
                     : this.diasTotalesTomadosMasEstaLicencia(unEmpleado, this.getClass()) <= 180;
     }
 
+    public int plusPorLosDiasTomados() {
+        return 0; //no se da ningun plus por tomarse dias por enfermedad
+    }
+
 }

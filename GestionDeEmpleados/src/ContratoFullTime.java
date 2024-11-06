@@ -6,11 +6,12 @@ public class ContratoFullTime extends Contrato{
 
     public ContratoFullTime(int unSueldoBasico) {
         super(unSueldoBasico);
-        this.cantidadDeHoras = 8;
         this.bonoAntiguedad = new BonoAntiguedad();
         this.bonoRendimiento = new BonoRendimiento();
         this.bonoPresentismo = new BonoPresentismo();
         this.bonoPorTitulosDeEstudio = new BonoPorTitulosDeEstudios();
+        this.cantidadDeHoras = 8;
+        this.valorPorHoraExtra = 7500;
     }
 
     @Override
@@ -20,6 +21,7 @@ public class ContratoFullTime extends Contrato{
                 + bonoPresentismo.calcularBono(empleado)
                 + bonoAntiguedad.calcularBono(empleado)
                 + bonoPorTitulosDeEstudio.calcularBono(empleado)
-                + empleado.calcularPlusPorLicenciasDeEstudio();
+                + empleado.calcularPlusPorLicenciasDeEstudio()
+                + this.valorPorHoraExtra * empleado.getHorasExtra() ;
     }
 }

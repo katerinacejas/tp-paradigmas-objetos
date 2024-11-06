@@ -14,4 +14,8 @@ public class LicenciaPorNacimiento extends Licencia {
     public int getDiasPermitidosPorSexo(Empleado unEmpleado) {
         return unEmpleado.getSexo() == Sexo.FEMENINO ? 90 : 2;
     }
+
+    public int plusPorLosDiasTomados() {
+        return 0; //no se da ningun plus por tomarse dias por nacimiento
+    }
 }

@@ -14,15 +14,16 @@ public abstract class Licencia {
 
     public abstract boolean puedeSerTomadaPor(Empleado unEmpleado);
 
+    public abstract int plusPorLosDiasTomados();
+
     //metodo utilizazdo en las licencias por estudio, por enfermedad y por vacaciones
     public int diasTotalesTomadosMasEstaLicencia(Empleado unEmpleado, Class<? extends Licencia> claseLicencia) {
         /*
             paso 1: obtengo la coleccion de licencias del empleado
             paso 2: filtro de todas las licencias las que son del tipo del objeto que llama a este metodo y que fueron tomadas en este año laboral
-            paso 3: me quedo con una coleccion de todos los días de duracion de cada licencia de dia de estudio de este año laboral
+            paso 3: me quedo con una coleccion de todos los días de duracion de cada licencia de ese tipo de este año laboral
             paso 4: hago una sumatoria de todos los dias que se tomo el empleado
             paso 5: a ese total le sumo los dias que se quiere tomar ahora
-            paso 6: valido si el valor obtenido del paso 5 es menor o igual a la cantidad maxima de dias que se pueden tomar por la licencia
         */
         return unEmpleado.getLicencias().stream()
                 .filter(licencia -> claseLicencia.isInstance(licencia) &&

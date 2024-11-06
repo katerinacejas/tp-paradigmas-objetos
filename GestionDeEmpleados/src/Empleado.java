@@ -11,10 +11,11 @@ public class Empleado {
     private Contrato contrato;
     private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
-    private HashSet<Licencia> licencias;
+    private Set<Licencia> licencias;
     private int diasTrabajadosMes;
+    private Set<Titulo> titulosDeEstudio;
 
-     //constructor
+    // constructor para empleados sin titulos de estudio inicialmente
     public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
@@ -24,6 +25,20 @@ public class Empleado {
         this.fechaDeIngreso = unaFechaDeIngreso;
         this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
         this.sexo = unSexo;
+        this.titulosDeEstudio = new HashSet<>();
+    }
+
+    // constructor para empleados que ya tienen titulo/titulos de estudio desde el inicio.
+    public Empleado (String unNombreCompleto, int unDni, Cargo unCargo, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo, Set<Titulo> unosTitulosDeEstudio) {
+        this.nombreCompleto = unNombreCompleto;
+        this.dni = unDni;
+        this.cargo = unCargo;
+        this.contrato = unContrato;
+        this.licencias = new HashSet<>();
+        this.fechaDeIngreso = unaFechaDeIngreso;
+        this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
+        this.sexo = unSexo;
+        this.titulosDeEstudio = unosTitulosDeEstudio;
     }
 
     public int calcularSueldo() {
@@ -65,12 +80,10 @@ public class Empleado {
     }
 
     public int calcularPlusPorLicenciasDeEstudio() {
-        int cantDiasPorEstudioTomadosEnEsteMes =
-                this.licencias.stream()
-                .filter(licencia -> LicenciaPorDiaDeEstudio.class.isInstance(licencia) &&
-                        licencia.fechaInicio.getYear() == LocalDate.now().getYear() &&
+        return this.licencias.stream()
+                .filter(licencia -> licencia.fechaInicio.getYear() == LocalDate.now().getYear() &&
                         licencia.fechaInicio.getMonth() == LocalDate.now().getMonth() )
-                .mapToInt(licencia -> licencia.diasDuracion)
+                .mapToInt(licencia -> licencia.plusPorLosDiasTomados())
                 .sum();
     }
 
@@ -103,11 +116,15 @@ public class Empleado {
         return (int) ChronoUnit.YEARS.between(this.fechaDeIngreso, LocalDate.now());
     }
 
-    public HashSet<Licencia> getLicencias() {
+    public Set<Licencia> getLicencias() {
         return this.licencias;
     }
 
     public int getDiasTrabajadosMes() {
         return diasTrabajadosMes;
+    }
+
+    public Set<Titulo> getTitulosDeEstudio() {
+        return this.titulosDeEstudio;
     }
 }
