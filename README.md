@@ -1,7 +1,7 @@
 # tp-paradigmas-objetos
 
 ## LO QUE FALTA HACER:
-1) Revisar BonoAntiguedad
+1) (ESTO YA ESTÁ TERMINADO) Revisar BonoAntiguedad
 2) (ESTO YA ESTÁ TERMINADO) Revisar BonoRendimiento
 3) Hashmap en clase Calendario
 4) ¿Bono en lugar de ser clase abstracta, podría ser una interfaz que se llame "Calculable"? Entonces cada uno de los bonos implementaria la interfaz "Calculable" para el metodo calcularBono(Empleado)
