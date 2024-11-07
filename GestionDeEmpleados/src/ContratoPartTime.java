@@ -1,6 +1,6 @@
 public class ContratoPartTime extends Contrato{
-    private Bono bonoPorTitulosDeEstudio;
-    private Bono bonoPresentismo;
+    private BonoCalculable bonoPorTitulosDeEstudio;
+    private BonoCalculable bonoPresentismo;
 
     public ContratoPartTime(int unSueldoBasico) {
         super(unSueldoBasico);

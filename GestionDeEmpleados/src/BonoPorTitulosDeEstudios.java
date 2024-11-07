@@ -1,4 +1,4 @@
-public class BonoPorTitulosDeEstudios extends Bono{
+public class BonoPorTitulosDeEstudios implements BonoCalculable {
     private int valorPorTitulo = 5000;
 
     @Override

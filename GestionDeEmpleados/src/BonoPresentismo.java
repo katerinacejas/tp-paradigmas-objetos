@@ -1,5 +1,5 @@
 import java.time.LocalDate;
-public class BonoPresentismo extends Bono {
+public class BonoPresentismo implements BonoCalculable {
     @Override
     public int calcularBono(Empleado empleado) {
         Calendario anioActual = new Calendario();

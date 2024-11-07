@@ -1,4 +1,4 @@
-public class BonoRendimiento extends Bono {
+public class BonoRendimiento implements BonoCalculable {
     @Override
     public int calcularBono(Empleado empleado) {
         return empleado.getNivelDeRendimiento() >= 3 ?

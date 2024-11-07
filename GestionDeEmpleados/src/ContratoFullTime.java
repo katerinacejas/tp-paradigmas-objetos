@@ -1,8 +1,8 @@
 public class ContratoFullTime extends Contrato{
-    private Bono bonoRendimiento;
-    private Bono bonoPresentismo;
-    private Bono bonoAntiguedad;
-    private Bono bonoPorTitulosDeEstudio;
+    private BonoCalculable bonoRendimiento;
+    private BonoCalculable bonoPresentismo;
+    private BonoCalculable bonoAntiguedad;
+    private BonoCalculable bonoPorTitulosDeEstudio;
 
     public ContratoFullTime(int unSueldoBasico) {
         super(unSueldoBasico);
