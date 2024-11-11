@@ -76,6 +76,10 @@ public class Empleado {
                 .collect(Collectors.toSet());
     }
 
+    public boolean tuveLicenciasEnElMesActual () {
+        return ! this.licenciasTranscurridasEnElMesActual().isEmpty();
+    }
+
     public int getDiasTrabajadosMes() {
         Calendario anioActual = new Calendario();
         int cantDiasHabiles = anioActual.diasHabilesMesActual(LocalDate.now().getMonthValue());
