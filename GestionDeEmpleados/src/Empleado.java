@@ -58,14 +58,15 @@ public class Empleado {
 
 
     public String tomarLicencia(Licencia unaLicencia) {
-        if (unaLicencia.puedeSerTomadaPor(this)){
+        try {
+            if (!unaLicencia.puedeSerTomadaPor(this)) {
+                throw new ExcepcionLicenciaDenegada(this.getNombreCompleto());
+            }
             licencias.add(unaLicencia);
             return "El empleado se tomó la licencia";
-        }
-        else {
-            // aca se lanzaría una excepcion o error por no poder tomar la licencia.
-            // por ahora un String xq no se como son las excepciones.
-            return "El empleado ya no tiene dias disponibles para tomarse esa licencia";
+
+        } catch (ExcepcionLicenciaDenegada excepcion) {
+            return "Error: " + excepcion.getMessage();
         }
     }
 
@@ -126,5 +127,9 @@ public class Empleado {
 
     public Set<Titulo> getTitulosDeEstudio() {
         return this.titulosDeEstudio;
+    }
+
+    public String getNombreCompleto() {
+        return this.nombreCompleto;
     }
 }
