@@ -1,11 +1,14 @@
+import java.util.HashSet;
 import java.util.Set;
 
 public class Empresa {
-    private Set<Empleado> empleados;
+    private Set<Empleado> empleados = new HashSet<>();
 
     public Empresa(Set<Empleado> unosEmpleados) {
-        this.empleados = unosEmpleados;
+        this.empleados.addAll(unosEmpleados);
     }
+
+    public Empresa() {}
 
     public void contratarOtroEmpleado(Empleado unEmpleado){
         this.empleados.add(unEmpleado);

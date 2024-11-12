@@ -11,19 +11,17 @@ public class Empleado {
     private Contrato contrato;
     private LocalDate fechaDeIngreso;
     private int nivelDeRendimiento; //del 1 al 5
-    private Set<Licencia> licencias;
-    private Set<Titulo> titulosDeEstudio;
+    private Set<Licencia> licencias = new HashSet<>();
+    private Set<Titulo> titulosDeEstudio = new HashSet<>();
 
     // constructor para empleados sin titulos de estudio inicialmente
     public Empleado (String unNombreCompleto, int unDni, Contrato unContrato, LocalDate unaFechaDeIngreso, Sexo unSexo) {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
         this.contrato = unContrato;
-        this.licencias = new HashSet<>();
         this.fechaDeIngreso = unaFechaDeIngreso;
         this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
         this.sexo = unSexo;
-        this.titulosDeEstudio = new HashSet<>();
     }
 
     // constructor para empleados que ya tienen titulo/titulos de estudio desde el inicio.
@@ -31,7 +29,6 @@ public class Empleado {
         this.nombreCompleto = unNombreCompleto;
         this.dni = unDni;
         this.contrato = unContrato;
-        this.licencias = new HashSet<>();
         this.fechaDeIngreso = unaFechaDeIngreso;
         this.nivelDeRendimiento = 3; //por default al inicio por ser valor intermedio
         this.sexo = unSexo;
