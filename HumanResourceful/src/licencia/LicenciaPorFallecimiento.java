@@ -1,3 +1,7 @@
+package licencia;
+
+import politicaDiasPorLicencia.PoliticaDiasPorLicencia;
+import empleado.Empleado;
 import java.time.LocalDate;
 
 public class LicenciaPorFallecimiento extends Licencia {

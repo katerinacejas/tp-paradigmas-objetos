@@ -1,3 +1,5 @@
+package politicaDiasPorLicencia;
+
 public class Conyuge implements PoliticaDiasPorLicencia {
 
     @Override

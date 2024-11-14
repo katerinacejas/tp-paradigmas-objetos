@@ -1,4 +1,8 @@
+package licencia;
+
 import java.time.LocalDate;
+import empleado.Empleado;
+import empleado.Sexo;
 
 public class LicenciaPorNacimiento extends Licencia {
 

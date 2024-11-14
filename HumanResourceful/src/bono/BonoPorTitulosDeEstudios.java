@@ -1,3 +1,6 @@
+package bono;
+import empleado.Empleado;
+
 public class BonoPorTitulosDeEstudios implements BonoCalculable {
     private int valorPorTitulo = 5000;
 

@@ -1,3 +1,12 @@
+import contrato.Contrato;
+import contrato.ContratoFullTime;
+import empleado.Empleado;
+import empleado.Sexo;
+import licencia.*;
+import politicaDiasPorLicencia.Hermano;
+import politicaDiasPorLicencia.Nieto;
+import politicaDiasPorLicencia.PoliticaDiasPorLicencia;
+
 import java.time.LocalDate;
 
 public class Main {

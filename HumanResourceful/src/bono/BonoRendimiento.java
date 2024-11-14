@@ -1,3 +1,6 @@
+package bono;
+import empleado.Empleado;
+
 public class BonoRendimiento implements BonoCalculable {
     @Override
     public int calcularBono(Empleado empleado) {

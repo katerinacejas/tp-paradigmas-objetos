@@ -1,7 +1,11 @@
+package contrato;
+import empleado.Empleado;
+
 public abstract class Contrato {
     protected int cantidadDeHoras;
     protected int sueldoBasico;
     protected int valorPorHoraExtra;
+
 
     public Contrato (int unSueldoBasico){
         this.sueldoBasico = unSueldoBasico;

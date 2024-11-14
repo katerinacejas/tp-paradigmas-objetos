@@ -1,5 +1,7 @@
+package licencia;
+
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
+import empleado.Empleado;
 
 public class LicenciaPorEnfermedad extends Licencia {
 

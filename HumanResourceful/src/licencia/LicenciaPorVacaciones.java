@@ -1,4 +1,7 @@
+package licencia;
+
 import java.time.LocalDate;
+import empleado.Empleado;
 
 public class LicenciaPorVacaciones extends Licencia {
 

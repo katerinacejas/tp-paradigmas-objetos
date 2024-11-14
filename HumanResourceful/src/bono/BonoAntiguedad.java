@@ -1,5 +1,8 @@
+package bono;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import empleado.Empleado;
 
 public class BonoAntiguedad implements BonoCalculable {
 

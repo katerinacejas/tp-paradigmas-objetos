@@ -1,3 +1,6 @@
+package contrato;
+import empleado.Empleado;
+
 public class ContratoPasantia extends Contrato{
 
     public ContratoPasantia (int unSueldoBasico) {

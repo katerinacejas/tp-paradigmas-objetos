@@ -1,4 +1,7 @@
+package licencia;
+
 import java.time.LocalDate;
+import empleado.Empleado;
 
 public class LicenciaPorDiaDeEstudio extends Licencia {
     public LicenciaPorDiaDeEstudio(LocalDate unaFechaInicio, LocalDate unaFechaFin) {

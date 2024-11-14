@@ -1,3 +1,5 @@
+package empleado;
+
 public class Titulo {
     private String nombre;
     private int puntaje;

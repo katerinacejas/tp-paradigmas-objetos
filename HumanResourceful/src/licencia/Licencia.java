@@ -1,10 +1,21 @@
+package licencia;
+
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import empleado.Empleado;
 
 public abstract class Licencia {
     protected LocalDate fechaInicio;
     protected LocalDate fechaFin;
     protected int diasDuracion;
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
 
     public Licencia (LocalDate unaFechaInicio, LocalDate unaFechaFin){
         this.fechaInicio = unaFechaInicio;

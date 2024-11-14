@@ -1,3 +1,8 @@
+package empleado;
+
+import licencia.Licencia;
+import contrato.Contrato;
+import licencia.ExcepcionLicenciaDenegada;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -69,8 +74,8 @@ public class Empleado {
 
     public Set<Licencia> licenciasTranscurridasEnElMesActual() {
         return this.licencias.stream()
-                .filter(licencia -> licencia.fechaInicio.getYear() == LocalDate.now().getYear() &&
-                                    licencia.fechaInicio.getMonth() == LocalDate.now().getMonth() )
+                .filter(licencia -> licencia.getFechaInicio().getYear() == LocalDate.now().getYear() &&
+                                    licencia.getFechaInicio().getMonth() == LocalDate.now().getMonth() )
                 .collect(Collectors.toSet());
     }
 

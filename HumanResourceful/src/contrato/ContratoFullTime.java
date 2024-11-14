@@ -1,3 +1,12 @@
+package contrato;
+import empleado.Empleado;
+import bono.BonoCalculable;
+import bono.BonoAntiguedad;
+import bono.BonoRendimiento;
+import bono.BonoPresentismo;
+import bono.BonoPorTitulosDeEstudios;
+
+
 public class ContratoFullTime extends Contrato{
     private BonoCalculable bonoRendimiento;
     private BonoCalculable bonoPresentismo;
